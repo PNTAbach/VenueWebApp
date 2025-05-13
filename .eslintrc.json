@@ -49,7 +49,9 @@
         "react/prop-types": "off",
         "no-unused-vars": "warn",
         "@typescript-eslint/no-inferrable-types": "off",
-        "prettier/prettier": ["warn", { "endOfLine": "auto" }]
+        "@typescript-eslint/no-non-null-assertion": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "prettier/prettier": "off"
     },
     "settings": {
         "import/resolver": {
