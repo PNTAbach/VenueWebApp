@@ -37,11 +37,6 @@ export const UserProvider = ({ children }: Props) => {
     }, []);
 
     const loginUser = async (data: UserLoginDTO): Promise<void> => {
-        // ✅ make sure NO old token pollutes the request
-        localStorage.removeItem('token');
-
-        delete axios.defaults.headers.common['Authorization'];
-
         userService
             .login(data)
             .then((response) => {
@@ -51,30 +46,8 @@ export const UserProvider = ({ children }: Props) => {
                 navigate('/home');
             })
             .catch((e) => {
-                if (axios.isAxiosError(e)) {
-                    const status = e.response?.status;
-                    const data = e.response?.data;
-
-                    console.error('Login failed. Status:', status);
-                    console.error('Response data:', data);
-
-                    if (status === 403) {
-                        setError(
-                            'Invalid credentials. Please check your email or password.'
-                        );
-                    } else if (data) {
-                        setError(
-                            typeof data === 'string'
-                                ? data
-                                : 'An error occurred.'
-                        );
-                    } else {
-                        setError('Login failed. Please try again.');
-                    }
-                } else {
-                    console.error('Unexpected error:', e);
-                    setError('Unexpected error occurred.');
-                }
+                console.error('Login Failed' + e);
+                setError(e);
             });
     };
 
