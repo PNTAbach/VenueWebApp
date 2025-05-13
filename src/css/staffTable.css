@@ -1,0 +1,95 @@
+.compnentStaffTableP {
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px;
+    border-radius: 14px;
+    margin: 5px;
+    box-shadow:
+        0 4px 8px 0 rgba(0, 0, 0, 0.01),
+        0 6px 20px 0 rgba(0, 0, 0, 0.01); /* Box shadow for depth */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+.custom-staff-header {
+    font-family: 'Poppins', sans-serif; /* Apply Poppins font to the elements */
+    /* Your existing styles here */
+}
+
+.custom-staff-header h2 {
+    margin-bottom: 0; /* Remove margin bottom for h2 */
+    font-weight: bold; /* Make h2 bold */
+}
+
+.custom-staff-header span {
+    font-style: italic; /* Make span italic */
+}
+
+.table {
+    background-color: #fff; /* Table background color */
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px; /* Padding for table cells */
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6; /* Table cell bottom border */
+    border-right: none; /* Remove top border for table header */
+    border-left: none;
+    border-bottom: none; /* Remove right border for th */
+    font-family: 'Poppins', sans-serif;
+}
+
+.table th {
+    background-color: #f8f9fa; /* Header background color */
+    font-weight: bold;
+    border-top: none; /* Remove top border for table header */
+    border-left: none; /* Remove left border for th */
+
+    border-right: none; /* Remove right border for th */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #730894d8; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+.action-dropdown {
+    margin-left: 10px; /* Margin between table and dropdown */
+}
+
+.dropdown-item {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px; /* Dropdown item font size */
+}
+/* Styling for the dropdown button */
+.action-dropdown .dropdown-toggle {
+    background-color: #730894d8; /* Background color for the dropdown button */
+    color: #fff; /* Text color for the dropdown button */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border-radius */
+    padding: 8px 12px; /* Add padding */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for the dropdown items */
+.action-dropdown .dropdown-menu {
+    background-color: #fff; /* Background color for the dropdown menu */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border-radius */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add box-shadow */
+}
+
+.action-dropdown .dropdown-item {
+    color: #333; /* Text color for dropdown items */
+}
+
+.action-dropdown .dropdown-item:hover,
+.action-dropdown .dropdown-item:focus {
+    background-color: #f0f0f0; /* Hover color for dropdown items */
+}

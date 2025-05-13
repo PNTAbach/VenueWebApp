@@ -1,0 +1,70 @@
+/* Main container */
+.main-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Main title */
+.main-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #1a2b42; /* Dark blue */
+    text-transform: uppercase;
+}
+
+/* Section titles */
+.section-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #1a2b42; /* Dark blue */
+}
+
+/* Venue section */
+.venue-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Venue description */
+.venue-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #495057; /* Dark grey */
+}
+
+/* Menu section */
+.menu-section {
+    margin-bottom: 30px;
+}
+
+/* Location section */
+.location-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Map title */
+.map-title {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #1a2b42; /* Dark blue */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 28px;
+    }
+}
+
+@media (min-width: 768px) {
+    .custom-height-md {
+        height: 550px;
+    }
+}

@@ -1,0 +1,82 @@
+/* Main container */
+.venue-info-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Header */
+.venue-header {
+    margin-bottom: 20px;
+}
+
+.venue-header h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Description */
+.venue-description {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Details */
+.venue-details {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+
+/* Details labels */
+.venue-details p {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 20px;
+}
+
+.venue-details p strong {
+    color: #333;
+    font-weight: bold;
+}
+
+/* Details values */
+.venue-details p span {
+    color: #888;
+}
+
+/* Venue ID */
+.venue-id {
+    text-align: right;
+    color: #888;
+    font-size: 16px;
+    margin-top: -10px;
+}
+
+/* Additional colors */
+.venue-header h2 {
+    color: #1a2b42; /* Dark blue */
+}
+
+.venue-description {
+    color: #495057; /* Dark grey */
+}
+
+.venue-details p {
+    color: #343a40; /* Dark grey */
+}
+
+.venue-details p strong {
+    color: #1a2b42; /* Dark blue */
+}
+
+.venue-details p span {
+    color: #6c757d; /* Grey */
+}
+
+.venue-id {
+    color: #6c757d; /* Grey */
+}
