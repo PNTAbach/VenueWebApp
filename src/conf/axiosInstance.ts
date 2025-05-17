@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 
-const url: string = 'http://localhost:8181/';
-
+const url: string = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+// process.env.REACT_APP_BACKEND_URL || || 'http://localhost:8080'
 const createAxiosClient = (): AxiosInstance => {
     const client = axios.create({
         baseURL: url,
@@ -12,18 +12,16 @@ const createAxiosClient = (): AxiosInstance => {
         withCredentials: false,
     });
 
-    // ✅ fix this logic
     client.interceptors.request.use((config) => {
-        // 👉 allow login/register requests without token
         const skipAuthEndpoints = ['/auth/authenticate', '/auth/register'];
 
-        if (
-            !skipAuthEndpoints.some((path) =>
-                config.url?.includes(path)
-            )
-        ) {
+        const isAuthEndpoint = skipAuthEndpoints.some((path) =>
+            config.url?.includes(path)
+        );
+
+        if (!isAuthEndpoint) {
             const token = localStorage.getItem('token');
-            if (token) {
+            if (token && config.headers) {
                 config.headers.Authorization = `Bearer ${token}`;
             }
         }
@@ -36,6 +34,7 @@ const createAxiosClient = (): AxiosInstance => {
         (error) => {
             if (error.response?.status === 401) {
                 localStorage.removeItem('token');
+                window.location.href = '/login';
             }
             return Promise.reject(error);
         }
@@ -43,4 +42,5 @@ const createAxiosClient = (): AxiosInstance => {
 
     return client;
 };
-export default createAxiosClient;   
+
+export default createAxiosClient;

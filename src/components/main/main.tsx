@@ -30,6 +30,8 @@ const Main: React.FC = () => {
             if (localStorage.getItem('token')) {
                 const venueService = new VenueService();
                 const data = await venueService.getVenueByToken();
+                console.log("Fetched venue data:", data);
+
                 setVenueData(data);
                 const userVenueService = new UserVenueService();
                 let userDataResponse =
