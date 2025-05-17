@@ -18,7 +18,6 @@ const VenueInfo: React.FC<{ venueData: VenueDTO }> = ({ venueData }) => {
                 <p>Price Rating: {venueData.priceRating}</p>
                 <p>Rating: {venueData.rating}</p>
                 <p>Types: {venueData.types.join(', ')}</p>
-                <p>Number of Menus: {venueData.menus.length}</p>
             </div>
         </div>
     );
