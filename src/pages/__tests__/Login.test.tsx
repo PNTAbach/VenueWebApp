@@ -65,14 +65,16 @@ describe('Login Page', () => {
         });
 
         render(<Login />);
-        expect(screen.getAllByText(/invalid email or password/i).length).toBeGreaterThan(0);
+        expect(
+            screen.getAllByText(/invalid email or password/i).length
+        ).toBeGreaterThan(0);
     });
 
-    test('navigates to /home after login', () => {
+    test('navigates to /overview after login', () => {
         // @ts-ignore
         useAuth.mockReturnValue({
             loginUser: (user: UserLoginDTO) => {
-                mockNavigate('/home');
+                mockNavigate('/overview');
             },
             error: null,
         });
@@ -88,6 +90,6 @@ describe('Login Page', () => {
 
         fireEvent.click(screen.getByRole('button', { name: /login/i }));
 
-        expect(mockNavigate).toHaveBeenCalledWith('/home');
+        expect(mockNavigate).toHaveBeenCalledWith('/overview');
     });
 });

@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 
-const url: string = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+const url: string =
+    process.env.REACT_APP_BACKEND_URL || 'http://localhost:8181';
 // process.env.REACT_APP_BACKEND_URL || || 'http://localhost:8080'
 const createAxiosClient = (): AxiosInstance => {
     const client = axios.create({
