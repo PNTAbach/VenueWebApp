@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { router } from './routes/routes';
+import { router } from './routes/routes'; // ✅ named import
 import { RouterProvider } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(

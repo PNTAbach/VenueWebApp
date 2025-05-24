@@ -1,22 +1,23 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import 'bootstrap'; // Import Bootstrap JavaScript
+import 'bootstrap';
 import '../../css/sidebar.css';
 import { useAuth } from '../../conf/useAuth';
 import { Button } from 'react-bootstrap';
 import { UserDTO } from '../../models/IUser';
 import UserService from '../../services/user.service';
+import { NavLink } from 'react-router-dom';
 
 interface SidebarProps {
     navItems: { href: string; text: string; icon: string }[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ navItems }) => {
-    const [userData, setUserData] = useState<UserDTO | null>(null); // Initialize user data as null
-    const [loading, setLoading] = useState<boolean>(true); // Initialize loading state as true
-
+    const [userData, setUserData] = useState<UserDTO | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
     const { logout } = useAuth();
+
     const handleLogout = (): void => {
         logout();
     };
@@ -27,10 +28,8 @@ const Sidebar: React.FC<SidebarProps> = ({ navItems }) => {
                 if (localStorage.getItem('token')) {
                     const userService = new UserService();
                     const data = await userService.getUserByToken();
-                    // Check if data is a UserDTO
                     if (typeof data === 'object' && data !== null) {
                         setUserData(data);
-                        console.log(data.fname);
                     } else {
                         console.error('Invalid user data:', data);
                     }
@@ -40,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ navItems }) => {
             } catch (error) {
                 console.error('Error fetching user data:', error);
             } finally {
-                setLoading(false); // Update loading state after fetching data
+                setLoading(false);
             }
         };
 
@@ -61,52 +60,55 @@ const Sidebar: React.FC<SidebarProps> = ({ navItems }) => {
             }}
         >
             {loading ? (
-                // Render loading state if data is being fetched
                 <div>Loading...</div>
             ) : (
                 <>
-                    <a
-                        href="/g"
+                    <NavLink
+                        to="/overview"
                         className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
                     >
                         <svg className="bi me-2" width="40" height="32">
                             <use xlinkHref="#bootstrap" />
                         </svg>
                         <span className="fs-4">PNTA</span>
-                    </a>
+                    </NavLink>
                     <hr />
                     <ul className="nav nav-pills flex-column mb-auto">
                         {navItems.map((item, index) => (
                             <li key={index} className="nav-item">
-                                <a
-                                    href={item.href}
-                                    className="nav-link text-white"
-                                    aria-current="page"
+                                <NavLink
+                                    to={item.href}
+                                    className={({ isActive }) =>
+                                        `nav-link text-white ${isActive ? 'active' : ''}`
+                                    }
+                                    end // <-- this forces absolute path match
                                 >
-                                    <svg
-                                        className="bi me-2"
-                                        width="16"
-                                        height="16"
-                                    >
-                                        <use xlinkHref={item.icon} />
-                                    </svg>
+                                    {item.icon && (
+                                        <svg
+                                            className="bi me-2"
+                                            width="16"
+                                            height="16"
+                                        >
+                                            <use xlinkHref={item.icon} />
+                                        </svg>
+                                    )}
                                     {item.text}
-                                </a>
+                                </NavLink>
                             </li>
                         ))}
                     </ul>
+
                     <hr />
                     <div className="dropdown">
-                        <a
-                            href="/g"
-                            className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                        <button
+                            className="d-flex align-items-center text-white text-decoration-none dropdown-toggle btn btn-dark"
                             id="dropdownUser1"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
                             <img
                                 src="https://github.com/mdo.png"
-                                alt=""
+                                alt="User avatar"
                                 width="32"
                                 height="32"
                                 className="rounded-circle me-2"
@@ -115,27 +117,35 @@ const Sidebar: React.FC<SidebarProps> = ({ navItems }) => {
                                 {userData
                                     ? `${userData.fname} ${userData.lname}`
                                     : 'Loading...'}
-                            </strong>{' '}
-                            {/* Render user name or "Loading..." */}
-                        </a>
+                            </strong>
+                        </button>
                         <ul
                             className="dropdown-menu dropdown-menu-dark text-small shadow"
                             aria-labelledby="dropdownUser1"
                         >
                             <li>
-                                <a className="dropdown-item" href="/g">
+                                <NavLink
+                                    className="dropdown-item"
+                                    to="/new-venue"
+                                >
                                     New Venue...
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
-                                <a className="dropdown-item" href="/g">
+                                <NavLink
+                                    className="dropdown-item"
+                                    to="/settings"
+                                >
                                     Settings
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
-                                <a className="dropdown-item" href="/g">
+                                <NavLink
+                                    className="dropdown-item"
+                                    to="/profile"
+                                >
                                     Profile
-                                </a>
+                                </NavLink>
                             </li>
                             <li>
                                 <hr className="dropdown-divider" />

@@ -43,7 +43,7 @@ export const UserProvider = ({ children }: Props) => {
                 localStorage.setItem('token', response.token);
                 setToken(response.token);
                 setError(null);
-                navigate('/home');
+                navigate('/overview');
             })
             .catch((e) => {
                 console.error('Login Failed' + e);
@@ -57,7 +57,7 @@ export const UserProvider = ({ children }: Props) => {
             .then((response) => {
                 localStorage.setItem('token', response.token);
                 setToken(response.token);
-                navigate('/home');
+                navigate('/overview');
                 setError(null);
             })
             .catch((e) => {
