@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent } from 'react';
 import PredictionBar from '../PredictionBar/predictionBar';
 import { predictSuccess, EventFeatures } from '../../services/predictSuccess';
+import EventService, { CreateEventDTO } from '../../services/event.service';
+
 
 const availableTags: { id: number; label: string }[] = [
     { id: 1, label: 'Techno' },
@@ -75,16 +77,24 @@ const EventForm = (): React.ReactElement => {
         price_rating_encoded: 1,
     });
 
+    const eventService = new EventService();
+
     const [tagIds, setTagIds] = useState<number[]>([]);
     const [score, setScore] = useState<number | null>(null);
 
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [eventDate, setEventDate] = useState('');
+    const [startTime, setStartTime] = useState('');
+    const [endTime, setEndTime] = useState('');
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        const { name, value } = e.target;
-        setForm((prev) => ({
-            ...prev,
-            [name]: parseFloat(value),
-        }));
-    };
+    const { name: inputName, value } = e.target;
+    setForm((prev) => ({
+        ...prev,
+        [inputName]: parseFloat(value),
+    }));
+};
 
     const handleTagChange = (tagId: number): void => {
         setTagIds((prev) =>
@@ -100,11 +110,78 @@ const EventForm = (): React.ReactElement => {
             .catch((err) => console.error('Prediction error:', err));
     };
 
+    const handleCreateEvent = async (): Promise<void> => {
+    const newEvent: CreateEventDTO = {
+        venueId: 1, // Replace with actual venueId
+        name,
+        description,
+        eventDate,
+        startTime,
+        endTime,
+    };
+
+    try {
+        const result = await eventService.createEvent(newEvent);
+        alert('Event created successfully!');
+        console.log(result);
+    } catch (error: any) {
+        console.error('Failed to create event:', error);
+        alert('Event creation failed.');
+    }
+};
+
     return (
         <div className="container mt-4">
             <h4>Create Event</h4>
 
-            {/* Numeric inputs */}
+            {/* Event Info */}
+            <div className="mb-3">
+                <label className="form-label">Event Name</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="form-control"
+                />
+            </div>
+            <div className="mb-3">
+                <label className="form-label">Description</label>
+                <input
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="form-control"
+                />
+            </div>
+            <div className="mb-3">
+                <label className="form-label">Event Date</label>
+                <input
+                    type="date"
+                    value={eventDate}
+                    onChange={(e) => setEventDate(e.target.value)}
+                    className="form-control"
+                />
+            </div>
+            <div className="mb-3">
+                <label className="form-label">Start Time</label>
+                <input
+                    type="time"
+                    value={startTime}
+                    onChange={(e) => setStartTime(e.target.value)}
+                    className="form-control"
+                />
+            </div>
+            <div className="mb-3">
+                <label className="form-label">End Time</label>
+                <input
+                    type="time"
+                    value={endTime}
+                    onChange={(e) => setEndTime(e.target.value)}
+                    className="form-control"
+                />
+            </div>
+
+            {/* Numeric inputs for prediction */}
             {Object.keys(form).map((key) => (
                 <div key={key} className="mb-3">
                     <label className="form-label">{key}</label>
@@ -141,10 +218,15 @@ const EventForm = (): React.ReactElement => {
                 ))}
             </div>
 
+            {/* Buttons */}
             <button className="btn btn-primary mt-2" onClick={handleTestScore}>
                 Test Success Score
             </button>
+            <button className="btn btn-success mt-2 ms-2" onClick={handleCreateEvent}>
+                Create Event
+            </button>
 
+            {/* Prediction output */}
             {score !== null && (
                 <div className="mt-4">
                     <PredictionBar score={score} />
